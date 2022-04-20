@@ -111,3 +111,82 @@ print(myD.loc['day2'])
   dur     440
   Name: day2, dtype: int64
 ```
+## Importing Data - Loading Data
+Importing data from external sources is the first step in data analysis.
+
+Pandas allow us to load external files like CSV, Excel, SQL, and many more.
+
+1. Reading CSV file.
+```python
+# Reading CSV files
+import pandas as pd
+
+hero_powers=pd.read_csv('file_name.csv') #or
+hero_powers=pd.read_csv('D:\\dataengi\\super_powers')
+
+# we can also use
+# hero_powers = pd.read_csv('file_name',sep=';',usecols=['col1',col2],norows=10,compression='zip')
+
+```
+2. Reading Excel Files.
+```python
+# reading excel file(xlsx)
+import pandas as pd
+
+hero_dc = pd.read_excel('file_name.xlsx',sheet_name='Dc Comics')
+hero_marvel = pd.read_excel('file_name.xlsx',sheet_name='Marvel Comics')
+```
+
+## Previewing the Data
+After loading the CSV and Excel files we can view them using the below methods.
+1. Just using print( variable_name)
+```python
+import pandas as pd
+
+print(hero_powers) ##This will print first 5 rows and last 5 rows of DataFrame.
+# this happens when the DataFrame exceeds 'max_rows'
+# we can find this max_rows by looking at 'pd.options.display.max_rows'
+# we can also change this setting.
+```
+2. using print(variable_name.to_string())
+```python
+# this will display entiry DataFrame
+print(hero_powers.to_string())
+```
+3. Analyzing data using methods in pandas - head()
+```python
+# we use some methods to get quick over view of DataFrame
+import pandas as pd
+
+df = pd.read_csv('file_name.csv')
+
+print(df.head(10))
+# here head(10) prints starting 10 rows of the DataFrame.if no number then staring 5 rows.
+```
+4. Tail()
+```python
+print(df.tail()) 
+# prints last 5 rows of the DataFrame.
+```
+5. info of the DataFrame
+```python
+print(df.info())
+# it prints the total information of DataFrame.
+
+# Note: If a DataFrame have more then 100 columns the info() method won't  give total info
+# so we force it to print total info by adding verbose= True
+print(df.info(verbose=True))
+```
+### Here we use DataFrame attributes to print DataFrame values.
+* These three are the main attributes of creating a DataFrame.
+1. columns
+```python
+import pandas as pd
+
+df = pd.read_csv ('file_name.csv')
+
+print(df.columns) 
+```
+2. Shape
+3. index
+4. dtypes
