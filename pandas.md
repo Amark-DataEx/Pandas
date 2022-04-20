@@ -9,3 +9,105 @@ There are two fundamental data structures.
 
 * Series—Pandas Series are like columns in a table. They’re 1D arrays holding data of any type.
 * Data Frame—Pandas DataFrames are like Tables. They’re 2D arrays holding data of any type, such as rows and columns.
+## Series
+``` python
+#creating Series out of List.
+import pandas as pd
+a=[1,2,3,'amar',34.90]
+
+mySeries=pd.Series(a)  # index(Axis lables) + data
+print(mySeries)
+
+# If no index is specified while creating Series then indexes 0 and 1 o is given default.
+
+>>> 0    1
+    1    7
+    2    2
+    dtype: int64
+    
+# to return any thing form Series
+mySeries[0]
+or
+print(mySeries[0])
+```
+Creating Series and its labels out of Lists.
+```python
+import pandas as pd
+a=[1,2,3,4]
+labels=['egg','fry','noodules','double'] # Here length of index should be equal to number of values.
+
+mySeries= pd.Series(a,index=labels)
+print(mySeries)
+
+>>> egg    1
+fry        2
+noodules   3
+double     4
+dtype: int64
+
+# To access the data 
+print(myseries['egg'])
+>>> 1
+```
+Creating Series out of Dictionary(key/Value objects)
+```python
+import pandas as pd
+
+a={"day1":200,"day2":300,"day3":400}
+
+mySeries = pd.Series(a)  # Here the key of dictionaries become index of Series.
+print(a) 
+>>>
+day1    200
+day2    300
+day3    400
+dtype: int64
+
+# we can also create Series using only few key: value pair.
+
+mySeries= pd.Series(a,index=['day1','day2'])
+print(mySeries)
+
+>>> day1 200
+day2 300
+int64
+```
+## DataFrames
+* These are like tables with rows and columns. These are 2D arrays.
+* These are the most commonly used Pandas objects.
+* To create these we need:  index(row labels) + data + column(column labels)
+
+```python
+# creating simple DataFrame using lists.
+import pandas as pd
+
+row1=[420,320]
+row2=[320,440]
+row3=[50,60]
+data=[row1,row2,row3]
+index=['day1','day2','day3']
+column=['cal','dur']
+
+myDataFrame = pd.DataFrame(index=index,data,columns=column)
+
+# Creating simple DataFrame using key/value pair
+import pandas as pd
+
+data={'cal':[200,300,400],'dur':[300,400,500]} # keys become column names.
+index=['day1','day2','day3']
+myD = pd.DataFrame(data,index=index)
+print(myD)
+
+
+# We can also turn Series into DataFrame.(example if we have two Series named 'mySeries')
+myD=pd.DataFrame({'first':mySeries,'second':mySeries*3})
+print(myD)
+>>>
+```
+Use the named index in the loc attribute to return the specified row(s)
+```python
+print(myD.loc['day2'])
+>>>cal    320
+  dur     440
+  Name: day2, dtype: int64
+```
