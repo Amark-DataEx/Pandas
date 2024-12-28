@@ -190,3 +190,63 @@ print(df.columns)
 2. Shape
 3. index
 4. dtypes
+
+## Converting dtypes
+There are three main built-in functions for converting dtypes.
+
+1. astype()
+```python
+import pandas as pd
+
+weather = pd.read_csv('weather.csv')
+
+print(weather.info()) # This gives the information about the DataFrame
+print(weather.dtypes) # this prints dtypes of the Dataframe.
+
+#Now we want to change the dtype of DataFrame.
+weather['temp_high'] = weather['temp_high'].astype(int)
+#This will change the dtype of temp_high column.
+
+
+# we can also convert two dtypes at once
+weather= weather.astype({'overcast':'catogry','comments':'string'})
+```
+2. to_numeric / to_datetime() - hard convert to numeric or datetime
+```python
+#Some times it hard to convert dtype.
+#Then we use to_numeric/ to_datetime()
+weather[temp_low]=pd.to_numeric(weather[temp_low],errors='coerce')
+
+weather['date'] = pd.to_datetime(weather['date'])
+weather.info()
+```
+3. read_*(dtype='')
+```python
+# we can also change dtype while reading the file.
+hero_powers = pd.read_csv('super_power.csv',dtype='string') # this will all the columns to string dtype.
+                            dtype={'hero_name':'string'} #  this will chnage only the give column dtype.
+---------------------------------------
+
+# if we want to change multiple values at the same time first we define it as dictionary
+# and then assign.
+hero_dc.dtypes
+
+hero_dtypes={'name':'string','gender':'category','eye color';'string','race':'string','hair_color':'string','alignment':'category'}
+
+hero_dc = pd.read_excel('super_hero.xlsx',sheet_name='Dc Comics',dtype='hero_dtypes')
+```
+## Exporting the Data
+There are two writer functions to export the data.
+
+1. to_csv() - read_csv() . This will return a DataFrame with messy data types even if we export after a clear data type. (note: always use index=False if not the the DataFrame will take index also as Data in DataFrame.)
+```python
+hero_dc=to_csv('hero_dc.csv',index=False)
+# to read it back
+hero_dc_csv = pd.read_csv('hero_dc.csv')
+```
+2. to_pickle() -read_pickle() .This is not recommended, unless you trust the source, this will keep the DataFrame as it is even after exporting and reading back.
+```python
+hero_marvel = to_pickle('hero_marvel.pkl')
+# to read it back 
+hero_marvel_pkl = pd.read_pickle('hero_marvel.pkl')
+```
